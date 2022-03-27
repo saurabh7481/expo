@@ -1,9 +1,14 @@
  window.addEventListener("load", () => {
      const signUpBtn = document.getElementsByClassName("signup");
-     console.log(signUpBtn)
      for(let i=0; i<signUpBtn.length; i++){
          const btn = signUpBtn[i];
          btn.addEventListener("click", signup);
+     }
+
+     const loginBtn = document.getElementsByClassName("login");
+     for(let i=0; i<loginBtn.length; i++){
+         const btn = loginBtn[i];
+         btn.addEventListener("click", login);
      }
 
      const loginToggle = document.getElementById("login-toggle");
@@ -12,6 +17,16 @@
      const signupToggle = document.getElementById("signup-toggle");
      signupToggle.addEventListener("click", toggleSignup);
  })
+
+ async function login(){
+    const form = document.getElementById("l-form");
+    const formData = new FormData(form);
+    const data = {
+        email: formData.get("email"),
+        password: formData.get("password")
+    }
+    console.log(data);
+ }
 
  async function signup(){
      const form = document.getElementById("s-form");
