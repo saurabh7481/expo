@@ -25,7 +25,20 @@
         email: formData.get("email"),
         password: formData.get("password")
     }
-    console.log(data);
+    try{
+        const res = await axios.post("http://localhost:3000/api/login", data);
+        if(res.status === 200){
+            alert("Logged in!");
+        } else if(res.status === 401){
+            alert("Invalid credentials");
+        } else if(res.status === 404){
+            alert("User not found");
+        } else {
+            console.log(res);
+        }
+    } catch(err){
+        console.log(err);
+    }
  }
 
  async function signup(){
