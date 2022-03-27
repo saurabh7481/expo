@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" async></script>
+    <title>Expo - Log In/Sign Up</title>
+</head>
+<body>
+    <div class="auth">
+        <div class="form-modal">
+    
+            <div class="form-toggle">
+                <button id="login-toggle" onclick="toggleLogin()">log in</button>
+                <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+            </div>
+        
+            <div id="login-form">
+                <form>
+                    <input type="text" placeholder="Enter email or username"/>
+                    <input type="password" placeholder="Enter password"/>
+                    <button type="button" class="btn login">login</button>
+                    <p><a href="javascript:void(0)">Forgotten account</a></p>
+                    <hr/>
+        
+                </form>
+            </div>
+        
+            <div id="signup-form">
+                <form>
+                    <input type="text" placeholder="Choose username"/>
+                    <input type="email" placeholder="Enter your email"/>
+                    <input type="tel" name="phone" placeholder="Enter your phone number"/>
+                    <input type="password" placeholder="Create password"/>
+                    <button type="button" class="btn signup">create account</button>
+                    <hr/>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+    
+    
+</body>
+</html>
