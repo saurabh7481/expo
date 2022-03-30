@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+*{
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+#reference {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f2f3f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frame {
+  min-width: 300px;
+  width: 50%;
+  min-height: 300px;
+  height: 80%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 1px 0 10px 1px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
+}
+.frame header {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: Glory, sans-serif;
+}
+.score-card {
+  flex: 1;
+  margin: 1rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.score-card .leader {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 60px;
+}
+.score-card .leader:not(:first-child) {
+  margin-top: 1rem;
+}
+.score-card .leader .user {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #ebedf6;
+}
+.score-card .leader .user .number {
+  padding: 3px 7px 3px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.score-card .leader .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3px 5px;
+  min-width: 50px;
+  width: 100px;
+}
+.score-card .leader .user-info .user-name {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.score-card .leader .expense {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3px 5px;
+    min-width: 50px;
+    width: 100px;
+}
+.score-card .leader .expense .expense-item {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.score-card .leader .expense .expense-item:not(:first-child) {
+  margin-left: 5px;
+}
+.cta-primary {
+  min-width: 120px;
+  padding: 8px 3px;
+  border: 1px solid currentcolor;
+  background-color: #0e1126;
+  color: #fff;
+  border-radius: 16px;
+}
+.cta-primary:hover {
+  transition: all 0.1s ease;
+  cursor: pointer;
+  border: 1px solid #0e1126;
+  color: #0e1126;
+  background-color: #fff;
+}

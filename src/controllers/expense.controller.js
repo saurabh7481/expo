@@ -1,9 +1,6 @@
-const db = require( "../models" );
-const Expense = db.expense;
-
 exports.addExpense = async ( req, res ) => {
 	try {
-		const expense = await Expense.create( {
+		const expense = await req.user.createExpense( {
 			description: req.body.description,
 			amount: req.body.amount,
 			category: req.body.category,
