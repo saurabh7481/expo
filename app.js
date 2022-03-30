@@ -12,6 +12,8 @@ const app = express();
 //Routes
 const authRoutes = require( "./src/routes/auth.routes" );
 const expenseRoutes = require( "./src/routes/expense.routes" );
+const plusRoutes = require( "./src/routes/plus.routes.js" );
+const userRoutes = require( "./src/routes/user.routes" );
 
 app.use( cors() );
 app.use( cookieParser() );
@@ -21,6 +23,8 @@ app.use( express.static( path.join( __dirname, "public" ) ) );
 
 app.use( "/api", authRoutes );
 app.use( "/api/expense", expenseRoutes );
+app.use( "/api/plus", plusRoutes );
+app.use( "/api/user", userRoutes );
 
 
 const PORT = process.env.PORT || 3000;

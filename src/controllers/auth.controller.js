@@ -9,6 +9,7 @@ exports.signup = async ( req, res ) => {
 			email: req.body.email,
 			phone: req.body.phone,
 			password: bcrypt.hashSync( req.body.password, 8 ),
+			subscription: "standard"
 		} );
 
 		if ( user ) res.send( { message: "User registered successfully!" } );
@@ -36,6 +37,6 @@ exports.login = async ( req, res ) => {
 		expire: new Date() + 8 * 3600 } 
 	);
 
-	const { username } = user;
-	return res.status( 200 ).json( { token, user: { username, email } } );
+	const { username, subscription } = user;
+	return res.status( 200 ).json( { token, user: { username, email, subscription } } );
 };
