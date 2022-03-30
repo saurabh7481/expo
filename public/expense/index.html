@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
     <title>Document</title>
   </head>
@@ -12,16 +13,17 @@
     <h2>Expense Tracker</h2>
     <div class="container">
       <h3>Add new transaction</h3>
-      <form action="" id="form">
+      <form id="form">
         <div class="form-control">
           <label for="text">Description</label>
-          <input type="text" id="text" placeholder="Please enter a description" />
+          <input name="desc" type="text" id="text" placeholder="Please enter a description" />
         </div>
         <div class="form-control">
           <label for="amount"
             >Amount <br /><small>Enter in negative for expense and positive for income.</small></label
           >
           <input
+            name="amount"
             type="number"
             id="amount"
             placeholder="Please enter the amount"
@@ -43,7 +45,7 @@
             <option value="Misc."></option>
           </datalist>
         </div>
-        <button class="btn">Add transaction</button>
+        <button type="button" class="btn">Add transaction</button>
       </form>
       <h3>History</h3>
       <ul id="list" class="list">

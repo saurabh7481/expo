@@ -31,7 +31,10 @@ exports.login = async ( req, res ) => {
 
 	const token = jwt.sign( { id: user.id }, process.env.JWT_SECRET );
 
-	res.cookie( "t", token, { expire: new Date() + 8 * 3600 } );
+	res.cookie( "token", token, {
+		httpOnly: true, 
+		expire: new Date() + 8 * 3600 } 
+	);
 
 	const { username } = user;
 	return res.status( 200 ).json( { token, user: { username, email } } );
