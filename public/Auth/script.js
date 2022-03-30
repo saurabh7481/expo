@@ -29,6 +29,8 @@
         const res = await axios.post("http://localhost:3000/api/login", data);
         if(res.status === 200){
             alert("Logged in!");
+            localStorage.setItem("auth", res.data);
+            location.href = "../expense/index.html";
         } else if(res.status === 401){
             alert("Invalid credentials");
         } else if(res.status === 404){
