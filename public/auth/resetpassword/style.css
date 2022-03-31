@@ -46,48 +46,31 @@ body{
     margin-top:0.5em;
 }
 
-.form-modal .login , .form-modal .signup{
+.form-modal .reset{
     background:#57b846;
     color:#fff;
 }
 
-.form-modal .login:hover , .form-modal .signup:hover{
+.form-modal .reset:hover{
     background:#222;
 }
 
-.form-toggle{
+.form-header{
     position: relative;
     width:100%;
     height:auto;
 }
 
-.form-toggle button{
-    width:50%;
-    float:left;
-    padding:1.5em;
-    margin-bottom:1.5em;
+#reset-pass{
+    width:100%;
+    padding:1em;
+    margin-bottom:1em;
     border:none;
     transition: 0.2s;
     font-size:1.1em;
     font-weight: bold;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
-}
-
-.form-toggle button:nth-child(1){
-    border-bottom-right-radius: 20px;
-}
-
-.form-toggle button:nth-child(2){
-    border-bottom-left-radius: 20px;
-}
-
-#login-toggle{
-    background:#57b846;
-    color:#ffff;
-}
-
-#reset-pass{
     background:#57b846;
     color:#ffff;
 }
@@ -100,19 +83,14 @@ body{
     transform:translateX(-50%);  
 }
 
-#login-form , #signup-form{
+#reset-form{
     position:relative;
     width:100%;
     height:auto;
     padding-bottom:1em;
 }
 
-#signup-form{
-    display: none;
-}
-
-
-#login-form button , #signup-form button{
+#reset-form button{
     width:100%;
     margin-top:0.5em;
     padding:0.6em;
@@ -152,22 +130,3 @@ body{
     color:#222;
 }
 
-
-.form-modal i {
-    position: absolute;
-    left:10%;
-    top:50%;
-    transform:translateX(-10%) translateY(-50%); 
-}
-
-@media only screen and (max-width:500px){
-    .form-modal{
-        width:100%;
-    }
-}
-
-@media only screen and (max-width:400px){
-    i{
-        display: none!important;
-    }
-}

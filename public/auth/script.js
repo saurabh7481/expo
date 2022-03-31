@@ -30,7 +30,7 @@
         if(res.status === 200){
             alert("Logged in!");
             localStorage.setItem("auth", res.data);
-            location.href = "../expense/index.html";
+            location.href = "../user/expense/index.html";
         } else if(res.status === 401){
             alert("Invalid credentials");
         } else if(res.status === 404){
