@@ -7,8 +7,14 @@ window.addEventListener("load", () => {
 })
 
 async function resetPassword(){
-    const email = document.getElementById("email").value;
+    const obj = {
+        email: document.getElementById("email").value
+    }
+    console.log(obj);
     try{
-        const res = await axios.post("http://localhost:3000/auth/password/forgotpassword", JSON.stringify(email));
+        const res = await axios.post("http://localhost:3000/api/password/forgotpassword", obj);
+        console.log(res);
+    } catch(err){
+        console.log(err);
     }
 }
