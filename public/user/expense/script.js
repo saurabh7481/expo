@@ -107,6 +107,10 @@ async function setTheme() {
         const res = await axios.get("http://localhost:3000/api/user/getsubscription");
         if(res.data === "plus"){
             document.querySelector("body").classList.add("dark-mode");
+            document.querySelector(".container").innerHTML += `
+            <button class="btn">View Expenses</button>
+            <button class="btn">Download your expenses</button>
+            `;
         }
     } catch(err) {
         console.log(err);

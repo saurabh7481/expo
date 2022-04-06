@@ -82,11 +82,9 @@ exports.forgotPassword = async ( req, res ) => {
 
 exports.resetPassword = async ( req, res ) => {
 	try{
-		console.log( req.params );
 		const req_id = req.params.id;
 
 		const request = await ResetPasswordRequest.findByPk( req_id );
-		console.log( request.isActive );
 		if( request.isActive ){
 			console.log( path.join( __dirname , ".." , "/utils/resetPassword.html" ) );
 			res.sendFile( path.join( __dirname , ".." , "/utils/resetPassword.html" ) );
