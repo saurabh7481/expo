@@ -113,7 +113,7 @@ async function setTheme() {
             document.querySelectorAll(".plus").forEach(el => {
                 el.style.display = "block"
             })
-            getExpenseFiles();
+            getExpenseFiles(1);
         }
     } catch(err) {
         console.log(err);
@@ -131,18 +131,36 @@ async function downloadExpense(){
     }
 }
 
-async function getExpenseFiles(){
-    const list = document.querySelector("#file-list");
+async function getExpenseFiles(page){
     try{
-        const res = await axios.get("http://localhost:3000/api/plus/expensefiles");
-        res.data.files.forEach(file => {
-            let tmp = `
-            <li class="files"><a href=${file.url}>${file.name}</a><span>${file.createdAt}</span></li>
-            `
-
-            list.innerHTML += tmp;
-        })
+        const pageNo = page;
+        const res = await axios.get(`http://localhost:3000/api/plus/expensefiles?page=${pageNo}`);
+        console.log(res);
+        renderExpenseFiles(res.data.result);
     } catch(err){
         console.log(err);
     }
+}
+
+function renderExpenseFiles(data){
+    const list = document.querySelector("#file-list");
+    const container = document.querySelector(".pages");
+    list.innerHTML = "";
+    container.innerHTML = "";
+    data.files.forEach(file => {
+        let tmp = `
+                <li class="files"><a href=${file.url}>${file.name}</a><span>${file.createdAt}</span></li>
+            `
+        list.innerHTML += tmp;
+    })
+
+    let pagesTemplate = "";
+    if(data.previous){
+        pagesTemplate = `<button class="page-btn" onclick=getExpenseFiles(${data.previous.page})>Previous</button>`
+    }
+    if(data.next){
+      pagesTemplate += `<button class="page-btn" onclick=getExpenseFiles(${data.next.page})>Next</button>`
+    }
+
+    container.innerHTML += pagesTemplate;
 }

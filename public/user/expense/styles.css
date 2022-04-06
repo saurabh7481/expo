@@ -172,6 +172,28 @@ a:hover{
 .list li.minus {
   border-right: 5px solid crimson;
 }
+
+.pages{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn {
+  background-color: transparent;
+  color: #fff;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: var(--bg) solid;
+  border-radius: 10px;
+  transition: ease-in 0.2s;  
+}
+
+.page-btn:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .delete-btn {
   cursor: pointer;
   background-color: var(--line);

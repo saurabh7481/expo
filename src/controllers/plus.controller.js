@@ -4,6 +4,8 @@ const AWS = require( "aws-sdk" );
 
 const userController = require( "./user.controller" );
 
+const ITEM_PER_PAGE = 5;
+
 exports.createOrder = async ( req, res ) => {
 	const { amount, currency, receipt, notes } = req.body;
 
@@ -84,11 +86,38 @@ const upoloadToS3 = ( data, name ) => {
 	} );
 };
 
-exports.getExpenseFiles = async (req, res) => {
-	try{
+exports.getExpenseFiles = async ( req, res ) => {
+	try {
+		const page = parseInt( req.query.page ) || 1;
+		const limit = parseInt( req.query.limit ) || ITEM_PER_PAGE;
+
+		const startIdx = ( page - 1 ) * limit;
+		const lastIdx = page * limit;
+
+		const result = {};
+
 		const files = await req.user.getExpensefiles();
-		res.status(200).json({success: true, files: files});
-	} catch(err){
-		res.json({success: false, error: err});
+		if ( lastIdx < files.length ) {
+			result.next = {
+				page: page + 1,
+				limit: limit,
+			};
+		}
+		if ( startIdx > 0 ) {
+			result.previous = {
+				page: page - 1,
+				limit: limit,
+			};
+		}
+
+		const paginatedFiles = await req.user.getExpensefiles( {
+			offset: startIdx,
+			limit: limit,
+		} );
+
+		result.files = paginatedFiles;
+		res.status( 200 ).json( { success: true, result: result } );
+	} catch ( err ) {
+		res.json( { success: false, error: err } );
 	}
-}
+};
