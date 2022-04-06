@@ -121,3 +121,40 @@ exports.getExpenseFiles = async ( req, res ) => {
 		res.json( { success: false, error: err } );
 	}
 };
+
+exports.getAllExpenses = async (req, res) => {
+	try {
+		const page = parseInt( req.query.page ) || 1;
+		const limit = parseInt( req.query.limit ) || ITEM_PER_PAGE;
+
+		const startIdx = ( page - 1 ) * limit;
+		const lastIdx = page * limit;
+
+		const result = {};
+
+		const expenses = await req.user.getExpenses();
+		console.log(expenses.length);
+		if ( lastIdx < expenses.length ) {
+			result.next = {
+				page: page + 1,
+				limit: limit,
+			};
+		}
+		if ( startIdx > 0 ) {
+			result.previous = {
+				page: page - 1,
+				limit: limit,
+			};
+		}
+
+		const paginatedExpenses = await req.user.getExpenses( {
+			offset: startIdx,
+			limit: limit,
+		} );
+
+		result.expenses = paginatedExpenses;
+		res.status( 200 ).json( { success: true, result: result } );
+	} catch ( err ) {
+		res.json( { success: false, error: err } );
+	}
+}

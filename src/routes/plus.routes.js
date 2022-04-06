@@ -9,5 +9,7 @@ router.post( "/createOrder", verifyAuth, plusController.createOrder );
 router.post( "/verifyOrder", verifyAuth, plusController.verifyOrder );
 router.get( "/download", verifyAuth, verifySubscription, plusController.downloadExpenses );
 router.get( "/expensefiles", verifyAuth, verifySubscription, plusController.getExpenseFiles );
+router.get("/expenses", verifyAuth, verifySubscription, plusController.getAllExpenses);
+
 
 module.exports = router;

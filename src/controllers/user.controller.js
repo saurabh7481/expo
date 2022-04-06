@@ -39,3 +39,4 @@ exports.getLeaderboard = async ( req, res ) => {
 		console.log( err );
 	}
 };
+

@@ -91,7 +91,7 @@ async function addExpense(){
         amount: formData.get("amount"),
         category: formData.get("category")
     }
-
+    console.log(data);
     try{
         const res = await axios.post("http://localhost:3000/api/expense/addexpense", data);
         if(res.status === 200){
