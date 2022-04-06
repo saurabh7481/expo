@@ -1,16 +1,17 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-const db = require( "../models" );
+import db from "../models";
 const User = db.user;
 const ResetPasswordRequest = db.ResetPasswordRequest;
-const bcrypt = require( "bcryptjs" );
-const crypto = require( "crypto" );
-const jwt = require( "jsonwebtoken" );
-const sgMail = require( "@sendgrid/mail" );
-const path = require( "path" );
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
+import sgMail from "@sendgrid/mail";
+import path from "path";
+import {Request, Response} from "express";
 
-sgMail.setApiKey( process.env.SENDGRID_KEY );
+sgMail.setApiKey( process.env.SENDGRID_KEY ?? "" );
 
-exports.signup = async ( req, res ) => {
+export const signUp = async ( req: Request, res: Response ) => {
 	try {
 		const user = await User.create( {
 			username: req.body.username,
@@ -21,12 +22,12 @@ exports.signup = async ( req, res ) => {
 		} );
 
 		if ( user ) res.send( { message: "User registered successfully!" } );
-	} catch ( error ) {
+	} catch ( error: any ) {
 		res.status( 500 ).send( { message: error.message } );
 	}
 };
 
-exports.login = async ( req, res ) => {
+export const login = async ( req: Request, res: Response ) => {
 	const { email, password } = req.body;
 	const user = await User.findOne( {
 		where: {
@@ -38,18 +39,18 @@ exports.login = async ( req, res ) => {
 	const validPass = await bcrypt.compare( password, user.password );
 	if ( !validPass ) return res.status( 401 ).json( { error: "Invalid Credentials" } );
 
-	const token = jwt.sign( { id: user.id }, process.env.JWT_SECRET );
+	const token = jwt.sign( { id: user.id }, process.env.JWT_SECRET ?? "" );
 
 	res.cookie( "token", token, {
 		httpOnly: true, 
-		expire: new Date() + 8 * 3600 } 
-	);
+		expires: new Date(Date.now() + (8 * 3600)) 
+	});
 
 	const {  username, subscription } = user;
 	return res.status( 200 ).json( { token, user: {  username, email, subscription } } );
 };
 
-exports.forgotPassword = async ( req, res ) => {
+export const forgotPassword = async ( req: Request, res: Response ) => {
 	try{
 		const email = req.body.email;
 		const user = await User.findOne( {
@@ -80,7 +81,7 @@ exports.forgotPassword = async ( req, res ) => {
 	}
 };
 
-exports.resetPassword = async ( req, res ) => {
+export const resetPassword = async ( req: Request, res: Response ) => {
 	try{
 		const req_id = req.params.id;
 
@@ -98,7 +99,7 @@ exports.resetPassword = async ( req, res ) => {
 
 };
 
-exports.updatePassword = async ( req, res ) => {
+export const updatePassword = async ( req: Request, res: Response ) => {
 	try {
 		const email = req.body.email;
 		const user = await User.findOne( {

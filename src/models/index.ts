@@ -1,5 +1,10 @@
-const config = require( "../config/db.config.js" );
+const config = require( "../config/db.config.ts" );
 const Sequelize = require( "sequelize" );
+
+interface Model {
+	[key: string]: any
+}
+
 const sequelize = new Sequelize(
 	config.DB,
 	config.USER,
@@ -9,7 +14,7 @@ const sequelize = new Sequelize(
 		dialect: config.dialect,
 	}
 );
-const db = {};
+const db: Model = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.user = require( "../models/user.model.js" )( sequelize, Sequelize );
@@ -27,4 +32,4 @@ db.ExpenseFile.belongsTo( db.user );
 db.user.hasMany( db.ResetPasswordRequest );
 db.ResetPasswordRequest.belongsTo( db.user );
 
-module.exports = db;
+export default db;

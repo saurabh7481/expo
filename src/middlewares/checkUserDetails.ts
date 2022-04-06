@@ -1,6 +1,8 @@
-const db = require( "../models" );
+import db from "../models";
 const User = db.user;
-const checkUserDetails = async ( req, res, next ) => {
+import {Request, Response, NextFunction} from "express";
+
+const checkUserDetails = async ( req: Request, res: Response, next: NextFunction ) => {
 	try {
 		let user = await User.findOne( {
 			where: {
@@ -30,4 +32,4 @@ const checkUserDetails = async ( req, res, next ) => {
 	}
 };
 
-module.exports = checkUserDetails;
+export default checkUserDetails;

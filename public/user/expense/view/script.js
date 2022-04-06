@@ -53,5 +53,5 @@ function renderExpenses(result){
       pagesTemplate += `<button class="page-btn" onclick=fetchExpenses(${result.next.page})>Next</button>`
     }
 
-    container.innerHTML += pagesTemplate;
+    container.innerHTML += pagesTemplate;eeee
 }

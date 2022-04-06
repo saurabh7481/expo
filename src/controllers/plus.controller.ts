@@ -1,12 +1,33 @@
-const razorpayInstance = require( "../utils/razorpay" );
-const crypto = require( "crypto" );
-const AWS = require( "aws-sdk" );
+import razorpayInstance from "../utils/razorpay";
+import crypto from "crypto";
+import AWS from "aws-sdk";
+import {Request, Response} from "express";
 
-const userController = require( "./user.controller" );
+import userController from "./user.controller";
+
+interface RequestExtended extends Request {
+	user?: any,
+	page?: string,
+	limit?: string
+}
+
+interface Result {
+	next: {
+		page: number,
+		limit: number
+	},
+	previous: {
+		page: number,
+		limit: number
+	},
+	files: any,
+	expenses: any
+}
 
 const ITEM_PER_PAGE = 5;
 
-exports.createOrder = async ( req, res ) => {
+
+const createOrder = async ( req: Request, res: Response ) => {
 	const { amount, currency, receipt, notes } = req.body;
 
 	try {
@@ -25,13 +46,13 @@ exports.createOrder = async ( req, res ) => {
 	}
 };
 
-exports.verifyOrder = async ( req, res ) => {
+const verifyOrder = async ( req: RequestExtended, res: Response ) => {
 	const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
     req.body;
 
 	const key_secret = process.env.RAZORPAY_SECRET;
 
-	let hmac = crypto.createHmac( "sha256", key_secret );
+	let hmac = crypto.createHmac( "sha256", key_secret ?? "" );
 
 	hmac.update( razorpay_order_id + "|" + razorpay_payment_id );
 
@@ -43,7 +64,7 @@ exports.verifyOrder = async ( req, res ) => {
 	} else res.json( { success: false, message: "Payment verification failed" } );
 };
 
-exports.downloadExpenses = async ( req, res ) => {
+const downloadExpenses = async ( req: RequestExtended, res: Response ) => {
 	try {
 		const expenses = await req.user.getExpenses();
 		const stringifiedExpenses = JSON.stringify( expenses );
@@ -63,13 +84,13 @@ exports.downloadExpenses = async ( req, res ) => {
 	}
 };
 
-const upoloadToS3 = ( data, name ) => {
+const upoloadToS3 = ( data: string, name: String ) => {
 	const s3 = new AWS.S3( {
 		accessKeyId: process.env.IAM_USERID,
 		secretAccessKey: process.env.IAM_SECRET,
 	} );
 
-	const params = {
+	const params: any = {
 		Bucket: process.env.S3_BUCKET,
 		Key: name,
 		Body: data,
@@ -77,7 +98,7 @@ const upoloadToS3 = ( data, name ) => {
 	};
 
 	return new Promise( ( resolve, reject ) => {
-		s3.upload( params, ( err, data ) => {
+		s3.upload( params, ( err: object, data: any ) => {
 			if ( err ) {
 				reject( err );
 			}
@@ -86,15 +107,15 @@ const upoloadToS3 = ( data, name ) => {
 	} );
 };
 
-exports.getExpenseFiles = async ( req, res ) => {
+const getExpenseFiles = async ( req: RequestExtended, res: Response ) => {
 	try {
-		const page = parseInt( req.query.page ) || 1;
-		const limit = parseInt( req.query.limit ) || ITEM_PER_PAGE;
+		const page =  Number(req.query.page) || 1;
+		const limit = Number(req.query.limit) || ITEM_PER_PAGE;
 
-		const startIdx = ( page - 1 ) * limit;
-		const lastIdx = page * limit;
+		const startIdx: number = ( page - 1 ) * limit;
+		const lastIdx: number = page * limit;
 
-		const result = {};
+		let result!: Result;
 
 		const files = await req.user.getExpensefiles();
 		if ( lastIdx < files.length ) {
@@ -122,15 +143,15 @@ exports.getExpenseFiles = async ( req, res ) => {
 	}
 };
 
-exports.getAllExpenses = async (req, res) => {
+const getAllExpenses = async (req: RequestExtended, res: Response) => {
 	try {
-		const page = parseInt( req.query.page ) || 1;
-		const limit = parseInt( req.query.limit ) || ITEM_PER_PAGE;
+		const page = Number( req.query.page ) || 1;
+		const limit = Number( req.query.limit ) || ITEM_PER_PAGE;
 
 		const startIdx = ( page - 1 ) * limit;
 		const lastIdx = page * limit;
 
-		const result = {};
+		let result!: Result;
 
 		const expenses = await req.user.getExpenses();
 		console.log(expenses.length);
@@ -157,4 +178,12 @@ exports.getAllExpenses = async (req, res) => {
 	} catch ( err ) {
 		res.json( { success: false, error: err } );
 	}
+}
+
+export default {
+	createOrder,
+	verifyOrder,
+	downloadExpenses,
+	getAllExpenses,
+	getExpenseFiles
 }

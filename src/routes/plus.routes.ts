@@ -1,9 +1,9 @@
-const express = require( "express" );
+import express from "express";
 const router = express.Router();
 
-const verifyAuth = require( "../middlewares/verifyAuth" );
-const plusController = require( "../controllers/plus.controller" );
-const verifySubscription = require( "../middlewares/verifySubscription" );
+import verifyAuth from "../middlewares/verifyAuth";
+import plusController from "../controllers/plus.controller";
+import verifySubscription from "../middlewares/verifySubscription";
 
 router.post( "/createOrder", verifyAuth, plusController.createOrder );
 router.post( "/verifyOrder", verifyAuth, plusController.verifyOrder );
@@ -12,4 +12,4 @@ router.get( "/expensefiles", verifyAuth, verifySubscription, plusController.getE
 router.get("/expenses", verifyAuth, verifySubscription, plusController.getAllExpenses);
 
 
-module.exports = router;
+export default router;

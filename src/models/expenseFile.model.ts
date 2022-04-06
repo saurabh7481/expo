@@ -1,4 +1,4 @@
-module.exports = ( sequelize, Sequelize ) => {
+module.exports = ( sequelize: any, Sequelize: any ) => {
 	const ExpenseFile = sequelize.define( "expensefile", {
 		id: {
 			type: Sequelize.INTEGER,

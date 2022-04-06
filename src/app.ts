@@ -1,19 +1,19 @@
-const express = require( "express" );
-const cors = require( "cors" );
-const dotenv = require( "dotenv" );
-const cookieParser = require( "cookie-parser" );
-const path = require( "path" );
-const db = require( "./src/models" );
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import path from "path";
+import db from "./models";
 
 dotenv.config();
 
 const app = express();
 
 //Routes
-const authRoutes = require( "./src/routes/auth.routes" );
-const expenseRoutes = require( "./src/routes/expense.routes" );
-const plusRoutes = require( "./src/routes/plus.routes.js" );
-const userRoutes = require( "./src/routes/user.routes" );
+import authRoutes from "./routes/auth.routes";
+import expenseRoutes from "./routes/expense.routes";
+import plusRoutes from "./routes/plus.routes.js";
+import userRoutes from "./routes/user.routes";
 
 app.use( cors() );
 app.use( cookieParser() );
