@@ -72,12 +72,13 @@ p {
   letter-spacing: 1px;
   margin: 5px 0;
 }
-.money.plus {
+.files {
   color: forestgreen;
 }
 .money.minus {
   color: crimson;
 }
+
 label {
   display: inline-block;
   margin: 10px 0;
@@ -98,6 +99,15 @@ input[list="category"] {
 
 small{
     font-size: x-small;
+}
+
+a{
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover{
+  cursor: pointer;
 }
 
 .buy-plus {
@@ -142,14 +152,20 @@ small{
   margin-bottom: 40px;
 }
 .list li {
-  background-color: var(--text);
+  background-color: forestgreen;
   color: var(--bg);
   display: flex;
   justify-content: space-between;
   position: relative;
   padding: 10px;
   margin: 10px 0;
+  transition: ease-in 0.2s;
 }
+
+.list li:hover{
+  transform: scale(1.1);
+}
+
 .list li.plus {
   border-right: 5px solid forestgreen;
 }
@@ -172,4 +188,8 @@ small{
 }
 .list li:hover .delete-btn {
   opacity: 1;
+}
+
+.plus {
+  display: none;
 }

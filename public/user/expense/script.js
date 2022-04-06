@@ -1,11 +1,14 @@
 window.addEventListener("load", () => {
     setTheme();
 
-    const addExpenseBtn = document.getElementsByClassName("btn");
+    const addExpenseBtn = document.getElementsByClassName("add");
      for(let i=0; i<addExpenseBtn.length; i++){
          const btn = addExpenseBtn[i];
          btn.addEventListener("click", addExpense);
      }
+
+    const downloadBtn = document.querySelector("#download");
+    downloadBtn.addEventListener("click", downloadExpense);
 
     const buyPlus = document.getElementsByClassName("buy-plus");
     for(let i=0; i<buyPlus.length; i++){
@@ -107,12 +110,39 @@ async function setTheme() {
         const res = await axios.get("http://localhost:3000/api/user/getsubscription");
         if(res.data === "plus"){
             document.querySelector("body").classList.add("dark-mode");
-            document.querySelector(".container").innerHTML += `
-            <button class="btn">View Expenses</button>
-            <button class="btn">Download your expenses</button>
-            `;
+            document.querySelectorAll(".plus").forEach(el => {
+                el.style.display = "block"
+            })
+            getExpenseFiles();
         }
     } catch(err) {
+        console.log(err);
+    }
+}
+
+async function downloadExpense(){
+    try{
+        const res = await axios.get("http://localhost:3000/api/plus/download");
+        if(res.status == 200){
+            window.open(res.data.url, "_blank");
+        }
+    } catch(err){
+        console.log(err);
+    }
+}
+
+async function getExpenseFiles(){
+    const list = document.querySelector("#file-list");
+    try{
+        const res = await axios.get("http://localhost:3000/api/plus/expensefiles");
+        res.data.files.forEach(file => {
+            let tmp = `
+            <li class="files"><a href=${file.url}>${file.name}</a><span>${file.createdAt}</span></li>
+            `
+
+            list.innerHTML += tmp;
+        })
+    } catch(err){
         console.log(err);
     }
 }
