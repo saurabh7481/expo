@@ -2,6 +2,11 @@ window.addEventListener("load", async () => {
     const res = await axios.get("http://localhost:3000/api/user/leaderboard");
     const expenses = sortByValues(res.data.expenses);
     renderLeaderboard(expenses);
+
+    const back = document.querySelector(".back-btn");
+    back.addEventListener("click", () => {
+        window.history.back();
+    })
 })
 
 function sortByValues(data){

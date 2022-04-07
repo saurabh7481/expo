@@ -8,11 +8,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="script.js"></script>
-    <title>Document</title>
+    <title>Expo - Expense Tracker</title>
   </head>
   <body>
     <h2>Expense Tracker</h2>
     <small class="buy-plus">Buy Expo Plus</small>
+    <small class="log-out">Log Out</small>
     <div class="container">
       <h3>Add new transaction</h3>
       <form id="form">
@@ -49,8 +50,9 @@
         <button type="button" class="btn add">Add transaction</button>
       </form>
       <br>
-      <button class="plus btn">View Expenses</button>
+      <button class="plus btn" id="view">View Expenses</button>
       <button class="plus btn" id="download">Download your expenses</button>
+      <button class="plus btn" id="leaderboard">Leaderboard</button>
       <br>
       <h3>Your previous files</h3>
       <ul id="file-list" class="list">

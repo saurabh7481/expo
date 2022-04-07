@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updatePassword = exports.resetPassword = exports.forgotPassword = exports.login = exports.signUp = void 0;
+exports.logout = exports.updatePassword = exports.resetPassword = exports.forgotPassword = exports.login = exports.signUp = void 0;
 /* eslint-disable no-mixed-spaces-and-tabs */
 const models_1 = __importDefault(require("../models"));
 const User = models_1.default.user;
@@ -57,7 +57,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = jsonwebtoken_1.default.sign({ id: user.id }, (_b = process.env.JWT_SECRET) !== null && _b !== void 0 ? _b : "");
     res.cookie("token", token, {
         httpOnly: true,
-        expires: new Date(Date.now() + (8 * 3600))
+        expires: new Date(Date.now() + 90000)
     });
     const { username, subscription } = user;
     return res.status(200).json({ token, user: { username, email, subscription } });
@@ -132,3 +132,8 @@ const updatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.updatePassword = updatePassword;
+const logout = (req, res) => {
+    res.clearCookie("token");
+    return res.redirect("/");
+};
+exports.logout = logout;

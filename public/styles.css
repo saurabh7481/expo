@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+*{
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+h1 {
+  font-weight: bold;
+  font-style: italic;
+  margin: 10px;
+  text-shadow: 2px 2px #000;
+}
+
+p {
+  font-style: italic;
+  text-shadow: 1px 1px #000;
+}
+
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 12px 35px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  border: 5px solid black;
+  margin-left: -1px;
+  margin-top: 5%;
+  font-size: 8pt;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.hero-text button:hover {
+  background-color: transparent;
+  color: white;
+  border: 5px solid black;
+  text-shadow: 2px 2px #000;
+}

@@ -28,7 +28,6 @@
     try{
         const res = await axios.post("http://localhost:3000/api/login", data);
         if(res.status === 200){
-            alert("Logged in!");
             localStorage.setItem("auth", res.data);
             location.href = "../user/expense/index.html";
         } else if(res.status === 401){
@@ -56,7 +55,7 @@
      try {
          const res = await axios.post("http://localhost:3000/api/signup", data);
          if(res.status === 200){
-             alert("User registration completed!");
+             alert("You are registered. Head on to login page.");
          } else if(res.status === 400) {
              alert("User already exists, please sign in");
          } else {

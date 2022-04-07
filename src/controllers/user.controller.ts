@@ -1,10 +1,10 @@
-const db = require( "../models" );
+import db from "../models";
 const User = db.user;
 import {Request, Response} from "express";
 
 interface UserInt {
 	id: number,
-	getExpenses: Function,
+	getExpenses: () => any,
 	username: string
 }
 

@@ -42,8 +42,8 @@ export const login = async ( req: Request, res: Response ) => {
 	const token = jwt.sign( { id: user.id }, process.env.JWT_SECRET ?? "" );
 
 	res.cookie( "token", token, {
-		httpOnly: true, 
-		expires: new Date(Date.now() + (8 * 3600)) 
+		httpOnly: true,
+		expires: new Date(Date.now() + 90000)	
 	});
 
 	const {  username, subscription } = user;
@@ -124,3 +124,8 @@ export const updatePassword = async ( req: Request, res: Response ) => {
 		res.json( { error: error } );
 	}
 };
+
+export const logout = (req: Request, res: Response) => {
+	res.clearCookie("token");
+	return res.redirect("/");
+}

@@ -1,7 +1,9 @@
 import {Request, Response} from "express";
+import db from "../models/index";
+const User = db.user;
 
 interface RequestExtended extends Request {
-	user?: any
+	user?: typeof User
 }
 
 export const addExpense = async ( req: RequestExtended, res: Response ) => {

@@ -5,16 +5,24 @@
     box-sizing: border-box;
 }
 
-#reference {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
+.back-btn{
+  padding: .4rem;
+  margin: 0.4rem;
+  background-color: rgb(196, 241, 243);
+  border: none;
+  border-radius: 10px;
 }
+
+.back-btn:hover{
+  cursor: pointer;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
   background-color: #f2f3f7;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -93,19 +101,4 @@
 }
 .score-card .leader .expense .expense-item:not(:first-child) {
   margin-left: 5px;
-}
-.cta-primary {
-  min-width: 120px;
-  padding: 8px 3px;
-  border: 1px solid currentcolor;
-  background-color: #0e1126;
-  color: #fff;
-  border-radius: 16px;
-}
-.cta-primary:hover {
-  transition: all 0.1s ease;
-  cursor: pointer;
-  border: 1px solid #0e1126;
-  color: #0e1126;
-  background-color: #fff;
 }

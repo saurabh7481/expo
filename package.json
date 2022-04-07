@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
-    "build": "tsc -p .",
+    "build": "tsc -p . && cp ./src/utils/resetPassword.html ./dist/utils",
     "lint:check": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --ignore-path .eslintignore --ext .js,.ts . --fix"
   },
   "author": "Saurabh Thakur",
   "license": "ISC",
@@ -34,8 +34,8 @@
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.23",
-    "@typescript-eslint/eslint-plugin": "^5.16.0",
-    "@typescript-eslint/parser": "^5.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0",

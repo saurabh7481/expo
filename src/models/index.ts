@@ -1,4 +1,5 @@
-const config = require( "../config/db.config.ts" );
+/* eslint-disable @typescript-eslint/no-var-requires */
+const config = require( "../config/db.config" );
 const Sequelize = require( "sequelize" );
 
 interface Model {
@@ -17,8 +18,8 @@ const sequelize = new Sequelize(
 const db: Model = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.user = require( "../models/user.model.js" )( sequelize, Sequelize );
-db.expense = require( "./expense.model.js" )( sequelize, Sequelize );
+db.user = require( "../models/user.model" )( sequelize, Sequelize );
+db.expense = require( "./expense.model" )( sequelize, Sequelize );
 db.ResetPasswordRequest = require( "./resetPasswordRequest.model" )( sequelize, Sequelize );
 db.ExpenseFile = require( "./expenseFile.model" )( sequelize, Sequelize );
 

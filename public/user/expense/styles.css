@@ -119,12 +119,12 @@ a:hover{
   cursor: pointer;
 }
 
-.buy-plus {
+.buy-plus, .log-out {
   font-size: small;
   padding: 0.5rem;
 }
 
-.buy-plus:hover{
+.buy-plus:hover, .log-out:hover{
   border-bottom: 1px #57b846 solid;
   cursor: pointer;
 }

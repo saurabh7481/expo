@@ -12,16 +12,10 @@ interface RequestExtended extends Request {
 }
 
 interface Result {
-	next: {
-		page: number,
-		limit: number
-	},
-	previous: {
-		page: number,
-		limit: number
-	},
-	files: any,
-	expenses: any
+	next: any,
+	previous: any,
+	files?: any,
+	expenses?: any
 }
 
 const ITEM_PER_PAGE = 5;
@@ -37,7 +31,6 @@ const createOrder = async ( req: Request, res: Response ) => {
 			receipt,
 			notes,
 		} );
-		console.log( "order", order );
 		if ( order ) {
 			res.json( { order: order, key: process.env.RAZORPAY_ID } );
 		}
@@ -52,7 +45,7 @@ const verifyOrder = async ( req: RequestExtended, res: Response ) => {
 
 	const key_secret = process.env.RAZORPAY_SECRET;
 
-	let hmac = crypto.createHmac( "sha256", key_secret ?? "" );
+	const hmac = crypto.createHmac( "sha256", key_secret ?? "" );
 
 	hmac.update( razorpay_order_id + "|" + razorpay_payment_id );
 
@@ -84,7 +77,7 @@ const downloadExpenses = async ( req: RequestExtended, res: Response ) => {
 	}
 };
 
-const upoloadToS3 = ( data: string, name: String ) => {
+const upoloadToS3 = ( data: string, name: string ) => {
 	const s3 = new AWS.S3( {
 		accessKeyId: process.env.IAM_USERID,
 		secretAccessKey: process.env.IAM_SECRET,
@@ -111,12 +104,15 @@ const getExpenseFiles = async ( req: RequestExtended, res: Response ) => {
 	try {
 		const page =  Number(req.query.page) || 1;
 		const limit = Number(req.query.limit) || ITEM_PER_PAGE;
-
 		const startIdx: number = ( page - 1 ) * limit;
 		const lastIdx: number = page * limit;
 
-		let result!: Result;
-
+		const result: Result = {
+			next: undefined,
+			previous: undefined,
+			files: undefined
+		};
+		
 		const files = await req.user.getExpensefiles();
 		if ( lastIdx < files.length ) {
 			result.next = {
@@ -130,7 +126,6 @@ const getExpenseFiles = async ( req: RequestExtended, res: Response ) => {
 				limit: limit,
 			};
 		}
-
 		const paginatedFiles = await req.user.getExpensefiles( {
 			offset: startIdx,
 			limit: limit,
@@ -151,10 +146,13 @@ const getAllExpenses = async (req: RequestExtended, res: Response) => {
 		const startIdx = ( page - 1 ) * limit;
 		const lastIdx = page * limit;
 
-		let result!: Result;
+		const result: Result = {
+			next: undefined,
+			previous: undefined,
+			expenses: undefined
+		};
 
 		const expenses = await req.user.getExpenses();
-		console.log(expenses.length);
 		if ( lastIdx < expenses.length ) {
 			result.next = {
 				page: page + 1,

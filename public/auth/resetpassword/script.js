@@ -13,7 +13,9 @@ async function resetPassword(){
     console.log(obj);
     try{
         const res = await axios.post("http://localhost:3000/api/password/forgotpassword", obj);
-        console.log(res);
+        if(res.status == 200){
+            alert("Reset password link sent to your mail.");
+        }
     } catch(err){
         console.log(err);
     }

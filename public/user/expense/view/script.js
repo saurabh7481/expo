@@ -5,6 +5,11 @@ window.addEventListener("load", () => {
 
     const getBtn = document.querySelector("#get")
     getBtn.addEventListener("click", fetchExpenses);
+
+    const back = document.querySelector("#back-btn")
+    back.addEventListener("click", () => {
+        window.history.back();
+    })
 })
 
 async function fetchExpenses(page=1){
@@ -20,18 +25,10 @@ async function fetchExpenses(page=1){
 }
 
 function renderExpenses(result){
-    const table = document.querySelector("#table");
+    const table = document.querySelector("#content");
     const container = document.querySelector(".pages");
     table.innerHTML = "";
     container.innerHTML = "";
-    table.innerHTML = `
-    <tr class="header-row">
-        <th class="header-item items">DATE</th>
-        <th class="header-item items">DESCRIPTION</th>
-        <th class="header-item items">CATEGORY</th>
-        <th class="header-item items">INCOME/EXPENSE</th>
-    </tr>
-    `;
     result.expenses.forEach(expense => {
         const tmp = `
         <tr class="table-rows">

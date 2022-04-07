@@ -14,15 +14,15 @@ const app = (0, express_1.default)();
 //Routes
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const expense_routes_1 = __importDefault(require("./routes/expense.routes"));
-const plus_routes_js_1 = __importDefault(require("./routes/plus.routes.js"));
+const plus_routes_1 = __importDefault(require("./routes/plus.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
-app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+app.use(express_1.default.static(path_1.default.join(__dirname, "..", "public")));
 app.use("/api", auth_routes_1.default);
 app.use("/api/expense", expense_routes_1.default);
-app.use("/api/plus", plus_routes_js_1.default);
+app.use("/api/plus", plus_routes_1.default);
 app.use("/api/user", user_routes_1.default);
 const PORT = process.env.PORT || 3000;
 models_1.default.sequelize.sync().then(() => {

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
-    <title>Document</title>
+    <title>Expo - View Expenses</title>
   </head>
   <body>
     <h2>Your Income/Expenses</h2>
@@ -23,14 +23,22 @@
         <button id="get">Get Expenses</button>
       </div>
       <table id="table">
-        <tr class="header-row">
-          <th class="header-item items">DATE</th>
-          <th class="header-item items">DESCRIPTION</th>
-          <th class="header-item items">CATEGORY</th>
-          <th class="header-item items">INCOME/EXPENSE</th>
-        </tr>
+        <thead>
+          <tr class="header-row">
+            <th class="header-item items">DATE</th>
+            <th class="header-item items">DESCRIPTION</th>
+            <th class="header-item items">CATEGORY</th>
+            <th class="header-item items">INCOME/EXPENSE</th>
+          </tr>
+        </thead>
+        <tbody id="content">
+
+        </tbody>
       </table>
       <div class="pages">
+      </div>
+      <div class="pages">
+        <button class="page-btn" id="back-btn">Go Back</button>
       </div>
     </div>
   </body>

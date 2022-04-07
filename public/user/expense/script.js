@@ -15,6 +15,19 @@ window.addEventListener("load", () => {
         const btn = buyPlus[i];
         btn.addEventListener("click", createOrder);
     }
+
+    const leaderboard = document.querySelector("#leaderboard");
+    leaderboard.addEventListener("click", () => {
+        location.href = "http://localhost:3000/user/leaderboard";
+    })
+
+    const view = document.querySelector("#view");
+    view.addEventListener("click", () => {
+        location.href = "http://localhost:3000/user/expense/view";
+    })
+
+    const logOut = document.querySelector(".log-out");
+    logOut.addEventListener("click", logout);
 })
 
 async function createOrder(){
@@ -163,4 +176,15 @@ function renderExpenseFiles(data){
     }
 
     container.innerHTML += pagesTemplate;
+}
+
+async function logout(){
+    try{    
+        const res = await axios.get("http://localhost:3000/api/logout");
+        if(res.status == 200){
+            location.href = "http://localhost:3000";
+        }
+    } catch(err){
+        alert("Something went wrong!");
+    }
 }

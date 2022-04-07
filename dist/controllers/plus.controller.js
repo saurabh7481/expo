@@ -26,7 +26,6 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             receipt,
             notes,
         });
-        console.log("order", order);
         if (order) {
             res.json({ order: order, key: process.env.RAZORPAY_ID });
         }
@@ -38,7 +37,7 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const verifyOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
     const key_secret = process.env.RAZORPAY_SECRET;
-    let hmac = crypto_1.default.createHmac("sha256", key_secret !== null && key_secret !== void 0 ? key_secret : "");
+    const hmac = crypto_1.default.createHmac("sha256", key_secret !== null && key_secret !== void 0 ? key_secret : "");
     hmac.update(razorpay_order_id + "|" + razorpay_payment_id);
     const generated_signature = hmac.digest("hex");
     if (razorpay_signature === generated_signature) {
@@ -90,7 +89,11 @@ const getExpenseFiles = (req, res) => __awaiter(void 0, void 0, void 0, function
         const limit = Number(req.query.limit) || ITEM_PER_PAGE;
         const startIdx = (page - 1) * limit;
         const lastIdx = page * limit;
-        let result;
+        const result = {
+            next: undefined,
+            previous: undefined,
+            files: undefined
+        };
         const files = yield req.user.getExpensefiles();
         if (lastIdx < files.length) {
             result.next = {
@@ -121,9 +124,12 @@ const getAllExpenses = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const limit = Number(req.query.limit) || ITEM_PER_PAGE;
         const startIdx = (page - 1) * limit;
         const lastIdx = page * limit;
-        let result;
+        const result = {
+            next: undefined,
+            previous: undefined,
+            expenses: undefined
+        };
         const expenses = yield req.user.getExpenses();
-        console.log(expenses.length);
         if (lastIdx < expenses.length) {
             result.next = {
                 page: page + 1,

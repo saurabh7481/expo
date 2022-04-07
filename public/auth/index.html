@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="script.js" async></script>
     <title>Expo - Log In/Sign Up</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="form-modal">
-    
-        <div class="form-toggle">
-            <button id="login-toggle">log in</button>
-            <button id="signup-toggle">sign up</button>
-        </div>
-    
-        <div id="login-form">
-            <form id="l-form">
-                <input name="email" type="text" placeholder="Enter email or username"/>
-                <input name="password" type="password" placeholder="Enter password"/>
-                <button type="button" class="btn login">login</button>
-                <p><a href="javascript:void(0)">Forgotten account</a></p>
-                <hr/>
-    
-            </form>
-        </div>
-    
-        <div id="signup-form">
-            <form id="s-form" method="post">
-                <input name="email" type="email" placeholder="Enter your email"/>
-                <input name="username" type="text" placeholder="Choose username"/>
-                <input name="phone" type="tel" placeholder="Enter contact number"/>
-                <input name="password" type="password" placeholder="Create password"/>
-                <button type="button" class="btn signup">create account</button>
-                <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0)">terms of services</a>.</p>
-                <hr/>
-               
-            </form>
-        </div>
-    
+      <div class="form-toggle">
+        <button id="login-toggle">log in</button>
+        <button id="signup-toggle">sign up</button>
+      </div>
+
+      <div id="login-form">
+        <form id="l-form">
+          <input
+            name="email"
+            type="text"
+            placeholder="Enter email or username"
+          />
+          <input name="password" type="password" placeholder="Enter password" />
+          <button type="button" class="btn login">login</button>
+          <p><a href="/auth/resetpassword">Forgotten account</a></p>
+          <hr />
+        </form>
+      </div>
+
+      <div id="signup-form">
+        <form id="s-form" method="post">
+          <input name="email" type="email" placeholder="Enter your email" />
+          <input name="username" type="text" placeholder="Choose username" />
+          <input name="phone" type="tel" placeholder="Enter contact number" />
+          <input
+            name="password"
+            type="password"
+            placeholder="Create password"
+          />
+          <button type="button" class="btn signup">create account</button>
+          <p>
+            Clicking <strong>create account</strong> means that you are agree to
+            our <a href="javascript:void(0)">terms of services</a>.
+          </p>
+          <hr />
+        </form>
+      </div>
     </div>
-    
-    
-    
-</body>
+  </body>
 </html>
