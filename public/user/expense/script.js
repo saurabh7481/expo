@@ -43,11 +43,10 @@ async function createOrder(){
     try{
         const res = await axios.post("http://localhost:3000/api/plus/createOrder", orderData);
         if(res.data){
-            console.log(res);
             checkout(res.data.order, res.data.key);
         }
     } catch(err){
-        console.log(err);
+        alert(err);
     }
 }
 
@@ -72,7 +71,6 @@ function checkout(data, key) {
     const razorpayObject = new Razorpay(options);
     console.log(razorpayObject);
     razorpayObject.on('payment.failed', function (response){
-          console.log(response);
           alert("This step of Payment Failed");
     });
       

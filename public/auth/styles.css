@@ -6,7 +6,7 @@
 }
 
 body{
-    background:#fff;
+    background:linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.5)), url("https://images.unsplash.com/photo-1523374228107-6e44bd2b524e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80") repeat;
 }
 
 .form-modal{
@@ -16,7 +16,7 @@ body{
     margin-top:4em;
     left:50%;
     transform:translateX(-50%);
-    background:#fff;
+    background:transparent;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -138,18 +138,19 @@ body{
 }
 
 .form-modal p{
+    color:#fff;
     font-size:16px;
     font-weight: bold;
 }
 
 .form-modal p a{
-    color:#57b846;
+    color:#fff;
     text-decoration: none;
     transition:0.2s;
 }
 
 .form-modal p a:hover{
-    color:#222;
+    color:#57b846;
 }
 
 
