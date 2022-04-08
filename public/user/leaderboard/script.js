@@ -1,5 +1,5 @@
 window.addEventListener("load", async () => {
-    const res = await axios.get("http://localhost:3000/api/user/leaderboard");
+    const res = await axios.get("http://13.233.197.99:3000/api/user/leaderboard");
     const expenses = sortByValues(res.data.expenses);
     renderLeaderboard(expenses);
 

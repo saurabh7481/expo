@@ -18,12 +18,12 @@ window.addEventListener("load", () => {
 
     const leaderboard = document.querySelector("#leaderboard");
     leaderboard.addEventListener("click", () => {
-        location.href = "http://localhost:3000/user/leaderboard";
+        location.href = "http://13.233.197.99:3000/user/leaderboard";
     })
 
     const view = document.querySelector("#view");
     view.addEventListener("click", () => {
-        location.href = "http://localhost:3000/user/expense/view";
+        location.href = "http://13.233.197.99:3000/user/expense/view";
     })
 
     const logOut = document.querySelector(".log-out");
@@ -41,7 +41,7 @@ async function createOrder(){
     };
 
     try{
-        const res = await axios.post("http://localhost:3000/api/plus/createOrder", orderData);
+        const res = await axios.post("http://13.233.197.99:3000/api/plus/createOrder", orderData);
         if(res.data){
             checkout(res.data.order, res.data.key);
         }
@@ -79,7 +79,7 @@ function checkout(data, key) {
 
 async function verifyOrder(data) {
     try{
-        const res = await axios.post("http://localhost:3000/api/plus/verifyOrder", data);
+        const res = await axios.post("http://13.233.197.99:3000/api/plus/verifyOrder", data);
         if(res.data.success){
             alert("You are now expo plus member");
         } else {
@@ -104,7 +104,7 @@ async function addExpense(){
     }
     console.log(data);
     try{
-        const res = await axios.post("http://localhost:3000/api/expense/addexpense", data);
+        const res = await axios.post("http://13.233.197.99:3000/api/expense/addexpense", data);
         if(res.status === 200){
             alert("Expense added");
             console.log(res);
@@ -118,7 +118,7 @@ async function addExpense(){
 
 async function setTheme() {
     try{
-        const res = await axios.get("http://localhost:3000/api/user/getsubscription");
+        const res = await axios.get("http://13.233.197.99:3000/api/user/getsubscription");
         if(res.data === "plus"){
             document.querySelector("body").classList.add("dark-mode");
             document.querySelectorAll(".plus").forEach(el => {
@@ -133,7 +133,7 @@ async function setTheme() {
 
 async function downloadExpense(){
     try{
-        const res = await axios.get("http://localhost:3000/api/plus/download");
+        const res = await axios.get("http://13.233.197.99:3000/api/plus/download");
         if(res.status == 200){
             window.open(res.data.url, "_blank");
         }
@@ -145,7 +145,7 @@ async function downloadExpense(){
 async function getExpenseFiles(page){
     try{
         const pageNo = page;
-        const res = await axios.get(`http://localhost:3000/api/plus/expensefiles?page=${pageNo}`);
+        const res = await axios.get(`http://13.233.197.99:3000/api/plus/expensefiles?page=${pageNo}`);
         console.log(res);
         renderExpenseFiles(res.data.result);
     } catch(err){
@@ -178,9 +178,9 @@ function renderExpenseFiles(data){
 
 async function logout(){
     try{    
-        const res = await axios.get("http://localhost:3000/api/logout");
+        const res = await axios.get("http://13.233.197.99:3000/api/logout");
         if(res.status == 200){
-            location.href = "http://localhost:3000";
+            location.href = "http://13.233.197.99:3000";
         }
     } catch(err){
         alert("Something went wrong!");

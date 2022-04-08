@@ -17,7 +17,7 @@ async function fetchExpenses(page=1){
         const val = document.querySelector("#page").value;
         localStorage.setItem("num", val);
 
-        const res = await axios.get(`http://localhost:3000/api/plus/expenses?page=${page}&limit=${val}`);
+        const res = await axios.get(`http://13.233.197.99:3000/api/plus/expenses?page=${page}&limit=${val}`);
         renderExpenses(res.data.result);
     } catch(err){
         console.log(err);

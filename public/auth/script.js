@@ -26,7 +26,7 @@
         password: formData.get("password")
     }
     try{
-        const res = await axios.post("http://localhost:3000/api/login", data);
+        const res = await axios.post("http://13.233.197.99:3000/api/login", data);
         if(res.status === 200){
             localStorage.setItem("auth", res.data);
             location.href = "../user/expense/index.html";
@@ -53,7 +53,7 @@
      }
 
      try {
-         const res = await axios.post("http://localhost:3000/api/signup", data);
+         const res = await axios.post("http://13.233.197.99:3000/api/signup", data);
          if(res.status === 200){
              alert("You are registered. Head on to login page.");
          } else if(res.status === 400) {
